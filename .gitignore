@@ -26,6 +26,3 @@ env/
 # Static & media (generated)
 staticfiles/
 media/
-
-# Django migrations (optional, only if you don’t want to push them)
-*/migrations/

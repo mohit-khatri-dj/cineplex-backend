@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-0qzabx4^yuo--(j*_-+@v-(x0lg3iurin9uz4c(ur=748u(dx*
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['https://api-cineplex.onrender.com/']
+ALLOWED_HOSTS = ["api-cineplex.onrender.com", "localhost", "127.0.0.1"]
 
 
 # Application definition

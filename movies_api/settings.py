@@ -144,3 +144,9 @@ REST_FRAMEWORK = {
 
 RAZORPAY_KEY_ID = 'rzp_test_ARV6EVJQoaSor3'
 RAZORPAY_KEY_SECRET = 'GJmsbWbbFJNL3PH9H9oydExz'
+
+from django.contrib.auth import get_user_model
+User = get_user_model()
+
+if not User.objects.filter(username="admin").exists():
+    User.objects.create_superuser("admin", "admin@example.com", "admin")

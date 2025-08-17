@@ -1,0 +1,31 @@
+# -----------------
+# Python / Django
+# -----------------
+__pycache__/
+*.py[cod]
+*.sqlite3
+*.log
+*.pot
+*.pyc
+*.pyo
+*.pyd
+*.db
+*.sqlite
+*.egg-info/
+db.sqlite3
+
+# Virtual environment
+venv/
+env/
+.venv/
+
+# Environment variables
+.env
+*.env
+
+# Static & media (generated)
+staticfiles/
+media/
+
+# Django migrations (optional, only if you don’t want to push them)
+*/migrations/

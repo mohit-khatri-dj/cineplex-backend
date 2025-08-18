@@ -130,18 +130,9 @@ STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")  # where collectstatic puts 
 # -----------------
 # Media files
 # -----------------
-import os
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+MEDIA_URL = '/media/'   # URLs will actually be Cloudinary URLs
 
-if os.getenv("CLOUDINARY_CLOUD_NAME"):
-    # Use Cloudinary in production
-    DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
-    MEDIA_URL = '/media/'   # URLs will actually be Cloudinary URLs
-else:
-    # Use local media storage for development
-    MEDIA_URL = '/media/'
-    MEDIA_ROOT = BASE_DIR / 'media'
-# Default primary key field type
-# https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 

@@ -89,6 +89,7 @@ DATABASES = {
 }
 
 
+
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
 
@@ -131,7 +132,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")  # where collectstatic puts 
 # Media files
 # -----------------
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
-MEDIA_URL = '/media/'   # URLs will actually be Cloudinary URLs
+#MEDIA_URL = '/media/'   # URLs will actually be Cloudinary URLs
 
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

@@ -1,7 +1,7 @@
 import os
 from pathlib import Path
 import dj_database_url
-
+import cloudinary_storage
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -131,6 +131,12 @@ STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")  # where collectstatic puts 
 # -----------------
 # Media files
 # -----------------
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'dyia6vlkk',
+    'API_KEY': '578761529688264',
+    'API_SECRET': 'gtzuuWOXgx8ceDSIrrf7rfcxB_0',
+}
+
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 #MEDIA_URL = '/media/'   # URLs will actually be Cloudinary URLs
 

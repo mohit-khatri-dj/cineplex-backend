@@ -31,6 +31,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'rest_framework.authtoken',
+    'cloudinary',
+    'cloudinary_storage',
 ]
 
 MIDDLEWARE = [
@@ -118,16 +120,26 @@ USE_I18N = True
 USE_TZ = True
 
 
+# -----------------
 # Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.2/howto/static-files/
-
+# -----------------
 STATIC_URL = 'static/'
-STATICFILES_DIRS = BASE_DIR / 'static',
-# For production - where collectstatic will put files
-STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+STATICFILES_DIRS = [BASE_DIR / 'static']  # your app-level static files
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")  # where collectstatic puts files for Render
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+# -----------------
+# Media files
+# -----------------
+import os
+
+if os.getenv("CLOUDINARY_CLOUD_NAME"):
+    # Use Cloudinary in production
+    DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+    MEDIA_URL = '/media/'   # URLs will actually be Cloudinary URLs
+else:
+    # Use local media storage for development
+    MEDIA_URL = '/media/'
+    MEDIA_ROOT = BASE_DIR / 'media'
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 

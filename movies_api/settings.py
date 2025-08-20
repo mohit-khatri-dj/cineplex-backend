@@ -1,10 +1,6 @@
 import os
 from pathlib import Path
 import dj_database_url
-import cloudinary_storage
-import cloudinary
-import cloudinary.uploader
-import cloudinary.api
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -35,8 +31,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'rest_framework.authtoken',
-    'cloudinary',
-    'cloudinary_storage',
+
 ]
 
 MIDDLEWARE = [
@@ -129,21 +124,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # -----------------
 STATIC_URL = 'static/'
-STATICFILES_DIRS = [BASE_DIR / 'static']  # your app-level static files
-STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")  # where collectstatic puts files for Render
+STATICFILES_DIRS = [BASE_DIR / 'static']  
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
-# -----------------
-# Media files
-# -----------------
-CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': 'dyia6vlkk',
-    'API_KEY': '578761529688264',
-    'API_SECRET': 'gtzuuWOXgx8ceDSIrrf7rfcxB_0',
-}
-
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
-#MEDIA_URL = '/media/'   # URLs will actually be Cloudinary URLs
-
+MEDIA_URL = '/media/' 
+MEDIA_ROOT = BASE_DIR / 'media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 

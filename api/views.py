@@ -35,7 +35,6 @@ class SeatBooking(CreateAPIView):
     serializer_class = BookingSerializer
 
     def perform_create(self, serializer):
-        print("🚀 Validated booking data:", serializer.validated_data)
         serializer.save()
 
 class UserCreateView(CreateAPIView):
@@ -43,7 +42,6 @@ class UserCreateView(CreateAPIView):
     serializer_class = UserSerializer
 
     def perform_create(self, serializer):
-        print("🚀 Validated user data:", serializer.validated_data)
         serializer.save()
 
 class UserListView(ListAPIView):
@@ -155,7 +153,6 @@ class CreateRazorpayOrderAPIView(APIView):
         amount = request.data.get('amount')
         currency = request.data.get('currency', 'INR')
         receipt = request.data.get('receipt', None)
-        print("🚀 Creating Razorpay order with data:", request.data)
         
         if not amount:
             return Response({'error': 'Amount is required'}, status=status.HTTP_400_BAD_REQUEST)
@@ -166,37 +163,10 @@ class CreateRazorpayOrderAPIView(APIView):
                 'currency': currency,
                 'payment_capture': 1,
             }
-            print(order_data)
             if receipt:
                 order_data['receipt'] = receipt
             order = razorpay_client.order.create(data=order_data)
-            print(order)
             return Response({'order': order}, status=status.HTTP_201_CREATED)
         except Exception as e:
             return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-class VerifyRazorpayPaymentAPIView(APIView):
-    """
-    API to verify Razorpay payment signature.
-    Expects: razorpay_order_id, razorpay_payment_id, razorpay_signature
-    """
-    def post(self, request):
-        order_id = request.data.get('razorpay_order_id')
-        payment_id = request.data.get('razorpay_payment_id')
-        signature = request.data.get('razorpay_signature')
-
-        if not (order_id and payment_id and signature):
-            return Response({'error': 'Missing parameters'}, status=status.HTTP_400_BAD_REQUEST)
-        try:
-            params_dict = {
-                'razorpay_order_id': order_id,
-                'razorpay_payment_id': payment_id,
-                'razorpay_signature': signature
-            }
-            # This will raise SignatureVerificationError if verification fails
-            razorpay_client.utility.verify_payment_signature(params_dict)
-            return Response({'status': 'Payment verified'}, status=status.HTTP_200_OK)
-        except razorpay.errors.SignatureVerificationError:
-            return Response({'error': 'Payment verification failed'}, status=status.HTTP_400_BAD_REQUEST)
-        except Exception as e:
-            return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
